@@ -6,7 +6,9 @@ ENV GOPATH=/gopath/
 ENV GOOS=linux
 ENV CGO_ENABLED=0
 
-RUN go get -u -v github.com/lixiangyun/benchmark
+WORKDIR /gopath/src/github.com/lixiangyun/
+RUN git clone https://github.com/lixiangyun/benchmark.git
+
 WORKDIR /gopath/src/github.com/lixiangyun/benchmark/tcp
 RUN go build .
 
