@@ -22,7 +22,7 @@ RUN go build .
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 
-WORKDIR /
+WORKDIR /bin
 COPY --from=0 /gopath/src/github.com/lixiangyun/benchmark/tcp/tcp ./tcp
 COPY --from=0 /gopath/src/github.com/lixiangyun/benchmark/httpserver/httpserver ./httpserver
 COPY --from=0 /gopath/src/github.com/lixiangyun/benchmark/httpclient/httpclient ./httpclient
