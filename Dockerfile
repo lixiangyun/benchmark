@@ -6,8 +6,9 @@ ENV GOPATH=/gopath/
 ENV GOOS=linux
 ENV CGO_ENABLED=0
 
-WORKDIR /gopath/src/github.com/lixiangyun/
-RUN git clone https://github.com/lixiangyun/benchmark.git
+COPY ./httpserver /gopath/src/github.com/lixiangyun/benchmark/httpserver
+COPY ./httpclient /gopath/src/github.com/lixiangyun/benchmark/httpclient
+COPY ./tcp /gopath/src/github.com/lixiangyun/benchmark/tcp
 
 WORKDIR /gopath/src/github.com/lixiangyun/benchmark/tcp
 RUN go build .
@@ -21,7 +22,7 @@ RUN go build .
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 
-WORKDIR /opt/
+WORKDIR /
 COPY --from=0 /gopath/src/github.com/lixiangyun/benchmark/tcp/tcp ./tcp
 COPY --from=0 /gopath/src/github.com/lixiangyun/benchmark/httpserver/httpserver ./httpserver
 COPY --from=0 /gopath/src/github.com/lixiangyun/benchmark/httpclient/httpclient ./httpclient
@@ -30,4 +31,4 @@ RUN chmod +x *
 
 EXPOSE 8080
 
-ENTRYPOINT ["./httpserver","-p",":8080"]
+CMD ["httpserver","-p",":8080"]
