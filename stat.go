@@ -129,6 +129,9 @@ func (s *Stat) Add(size int, tm uint64) {
 
 func (s *Stat) Delete() {
 	s.stop <- struct{}{}
+	if len(s.sample) == 0 {
+		return
+	}
 	var avg Item
 	for _, v := range s.sample {
 		avg.Add(v)
