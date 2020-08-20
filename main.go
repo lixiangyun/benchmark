@@ -52,7 +52,7 @@ func init() {
 	flag.IntVar(&RUNTIME, "runtime", 60, "total run time (second).")
 	flag.IntVar(&BODY_LENGTH, "body", 1, "transport body length (KB).")
 
-	flag.StringVar(&ADDRESS, "address", "127.0.0.1", "service/client address.")
+	flag.StringVar(&ADDRESS, "address", "0.0.0.0", "service/client address.")
 	flag.IntVar(&PORT, "port", 8001, "service/client port.")
 	flag.IntVar(&LIMITE_RATE, "limit", 0, "limit times per second to send. as[0,1000]")
 
